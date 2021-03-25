@@ -51,3 +51,6 @@ pm2logs/
 node_modules/
 package-lock.json
 coamc-zcw-frontend/assets/
+# mac os
+.DS_Store
+
