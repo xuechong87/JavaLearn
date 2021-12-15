@@ -10,6 +10,7 @@ public class ASTTest {
         put('{','}');
         put('(',')');
         put('[',']');
+        put('<','>');
     }};
 
     public boolean valid(String input){
@@ -38,6 +39,32 @@ public class ASTTest {
         return result;
     }
 
+    public boolean valid2(String input){
+        if (input==null||input.length()<=0){
+            return false;
+        }
+        Set<Character> starts = keys.keySet();
+        Set<Character> ends = new HashSet<Character>(keys.values());
+
+        Stack<Character> endsStack = new Stack<Character>();
+        for (Character c :input.toCharArray()){
+
+            if(starts.contains(c)){
+                endsStack.push(keys.get(c));
+
+            }else if(ends.contains(c)){
+                if(endsStack.empty()){
+                    return false;
+                }
+                if(endsStack.pop()!=c){
+                    return false;
+                }
+            }
+            System.out.println(endsStack);
+        }
+        return endsStack.empty();
+    }
+
     @Test
     public void test1(){
         String inputStr = "{)";
@@ -49,6 +76,24 @@ public class ASTTest {
         String inputStr3 = "{}[]{}()({[])}";
         System.out.println("Test3:" + valid(inputStr3));
 
+        String inputStr4 = "Stack<Character> endsStack = new Stack<Character>();\n" +
+                "        for (Character c :input.toCharArray()){\n" +
+                "            if(starts.contains(c)){\n" +
+                "                endsStack.push(keys.get(c));\n" +
+                "            }else{\n" +
+                "                if(endsStack.empty()){\n" +
+                "                    result= false;\n" +
+                "                    break;\n" +
+                "                }\n" +
+                "                if(endsStack.pop()!=c){\n" +
+                "                    result= false;\n" +
+                "                    break;\n" +
+                "                }\n" +
+                "                result= true;\n" +
+                "            }\n" +
+                "        }";
+
+        System.out.println("Test4:" + valid2(inputStr4));
     }
 
 
