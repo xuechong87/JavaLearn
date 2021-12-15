@@ -8,6 +8,7 @@ public class Hello {
 
     @RequestMapping("/")
     String home() {
+
         return "Hello World!";
     }
 }
