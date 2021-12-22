@@ -20,7 +20,7 @@ public class ASTTest {
         }
         Set<Character> starts = keys.keySet();
 
-        Stack<Character> endsStack = new Stack<Character>();
+        Stack<Character> endsStack = new Stack<>();
         for (Character c :input.toCharArray()){
             if(starts.contains(c)){
                 endsStack.push(keys.get(c));
@@ -44,9 +44,8 @@ public class ASTTest {
             return false;
         }
         Set<Character> starts = keys.keySet();
-        Set<Character> ends = new HashSet<Character>(keys.values());
-
-        Stack<Character> endsStack = new Stack<Character>();
+        Set<Character> ends = new HashSet<>(keys.values());
+        Stack<Character> endsStack = new Stack<>();
         for (Character c :input.toCharArray()){
 
             if(starts.contains(c)){
@@ -60,7 +59,7 @@ public class ASTTest {
                     return false;
                 }
             }
-            System.out.println(endsStack);
+            //System.out.println(endsStack);
         }
         return endsStack.empty();
     }
