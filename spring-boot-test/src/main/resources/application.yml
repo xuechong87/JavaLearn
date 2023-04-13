@@ -1,0 +1,9 @@
+app:
+  name: "springboottest"
+  description: "${app.name} is a Spring Boot application"
+
+server:
+  port: 9090
+
+my:
+  testprop: "testprop"
