@@ -38,4 +38,5 @@ public class MvcTest {
                     .andExpect(status().isOk())
                     .andExpect(content().string(equalTo(myProp.getTestprop())));
         }
+
 }

@@ -5,5 +5,10 @@ app:
 server:
   port: 9090
 
+
+
 my:
   testprop: "testprop"
+dubbo:
+  application:
+    name: "my-cosumer"

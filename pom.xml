@@ -5,6 +5,7 @@
 
     <groupId>com.luckystars</groupId>
     <artifactId>spring-boot-testall</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
     <parent>
@@ -16,6 +17,7 @@
     <modules>
         <module>spring-boot-mystarter</module>
         <module>spring-boot-test</module>
+        <module>DubboAPI</module>
     </modules>
     <properties>
         <spring-boot-mystarter>0.0.1-SNAPSHOT</spring-boot-mystarter>
