@@ -18,6 +18,7 @@
         <module>spring-boot-mystarter</module>
         <module>spring-boot-test</module>
         <module>DubboAPI</module>
+        <module>spring-cloud-provider</module>
     </modules>
     <properties>
         <spring-boot-mystarter>0.0.1-SNAPSHOT</spring-boot-mystarter>

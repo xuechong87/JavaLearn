@@ -1,10 +1,10 @@
 app:
-  name: "springbootmystarter"
+  name: "spring-cloud-provider-test"
   description: "${app.name} is a Spring Boot application"
 
 dubbo:
   application:
-    name: "my-provider"
+    name: "my-cloud-provider"
   protocol:
     name: "dubbo"
     port: 20880

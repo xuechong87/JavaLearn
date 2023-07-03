@@ -9,6 +9,9 @@ server:
 
 my:
   testprop: "testprop"
+
 dubbo:
   application:
     name: "my-cosumer"
+  registry:
+    address: "zookeeper://127.0.0.1:2181"
