@@ -1,6 +1,6 @@
 package com.luckystars.tests;
 
-import com.sun.javafx.sg.prism.NGExternalNode;
+
 
 public class Linklist <T>{
 
@@ -38,13 +38,11 @@ public class Linklist <T>{
     public Integer setVal(Integer start){
         this.setValue((T) start);
         if(this.leftChild!=null){
-            this.leftChild.setValue((T) (++start));
-            this.rightChild.setValue((T) (++start));
+//            this.leftChild.setValue((T) (++start));
+//            this.rightChild.setValue((T) (++start));
 
-
-
-            start = this.leftChild.setVal(start);
-            start = this.rightChild.setVal(start);
+            start = this.leftChild.setVal(++start);
+            start = this.rightChild.setVal(++start);
         }
         start ++;
         return start;

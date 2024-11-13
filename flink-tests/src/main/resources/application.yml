@@ -1,0 +1,4 @@
+app:
+  name: "flink-tests"
+  description: "${app.name} is a Spring Boot application"
+

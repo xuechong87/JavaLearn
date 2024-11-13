@@ -19,6 +19,7 @@
         <module>spring-boot-test</module>
         <module>DubboAPI</module>
         <module>spring-cloud-provider</module>
+        <module>Tests</module>
     </modules>
     <properties>
         <spring-boot-mystarter>0.0.1-SNAPSHOT</spring-boot-mystarter>
@@ -34,7 +35,7 @@
     <licenses>
         <license/>
     </licenses>
-    
+
     <scm>
         <url/>
     </scm>
