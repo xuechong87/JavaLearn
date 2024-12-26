@@ -23,8 +23,17 @@ class EvilTests {
 
     @Test
     def void Test1(){
-        String script = "System.out.println(\"Hello World\")";
-        new GroovyShell().evaluate(script);
+//        String script = "System.out.println(\"Hello World\")";
+        //这里需要import DynamicClass 否则会报错
+        String script2 = "import com.luckystars.groovytests.EvilTests.DynamicClass;" +
+                "       DynamicClass.metaClass.printName = {println name}; \n" +
+                "        DynamicClass dc = new DynamicClass();\n" +
+                "        dc.name = \"阿发啊啊啊\";\n" +
+                "        dc.printName();\n" +
+                "        DynamicClass.metaClass.age = 10;\n" +
+                "        DynamicClass.metaClass.printAge = {println age};\n" +
+                "        dc.printAge();";
+        new GroovyShell().evaluate(script2);
     }
 
 }
