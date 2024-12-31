@@ -31,12 +31,13 @@ public class StringUtil {
 
 
 
-    private static final String[] CN_UPPER_NUMBER = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
-    private static final String[] CN_UPPER_MONETRAY_UNIT = {"分", "角", "元", "拾", "佰", "仟", "万", "拾", "佰", "仟", "亿", "拾", "佰", "仟"};
     /**
      * 转成中文数字
      */
     public static String toChinese(BigDecimal num) {
+        final String[] CN_UPPER_NUMBER = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
+        final String[] CN_UPPER_MONETRAY_UNIT = {"分", "角", "元", "拾", "佰", "仟", "万", "拾", "佰", "仟", "亿", "拾", "佰", "仟"};
+
         if (num == null || num.compareTo(BigDecimal.ZERO) == 0) {
             return "零";
         }
@@ -66,11 +67,10 @@ public class StringUtil {
     }
 
 
-
-
-
     public String toString(){
         return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
+
+
 
 }
