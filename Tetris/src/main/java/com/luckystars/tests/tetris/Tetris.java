@@ -122,7 +122,7 @@ public class Tetris  extends JFrame {
             }
         };
 
-        timer = new Timer(500, listener);
+        timer = new Timer(800, listener);
         timer.start();
 
         setVisible(true);
