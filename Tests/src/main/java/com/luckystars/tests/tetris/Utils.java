@@ -19,7 +19,12 @@ public class Utils {
         System.out.println("print Shape start");
         for (int i = 0; i < shape.length; i++) {
             for (int j = 0; j < shape[i].length; j++) {
-                System.out.print(shape[i][j] + " ");
+                if(shape[i][j]==0){
+                    System.out.print("□ ");
+                }else{
+                    System.out.print("■ ");
+                }
+//                System.out.print(shape[i][j] + " ");
             }
             System.out.println();
         }

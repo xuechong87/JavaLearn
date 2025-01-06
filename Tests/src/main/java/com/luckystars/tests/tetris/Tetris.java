@@ -37,8 +37,8 @@ public class Tetris  extends JFrame {
 
         };
 
-        this.currentBlock = BlockImpl.getRandomBlock(gamePanel);
         this.ground = new BaseGroundImpl(gamePanel);
+        this.currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
 
 
         gamePanel.setBackground(Color.BLACK);
@@ -68,12 +68,12 @@ public class Tetris  extends JFrame {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_TAB)  {
                     System.out.println("tab");
-                    currentBlock = BlockImpl.getRandomBlock(gamePanel);
+                    currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE)  {
                     System.out.println("space");
                     ground.pushIntoGround(currentBlock);
-                    currentBlock = BlockImpl.getRandomBlock(gamePanel);
+                    currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
                 }
             }
 

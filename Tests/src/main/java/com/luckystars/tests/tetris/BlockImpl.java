@@ -5,7 +5,6 @@ import java.awt.*;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Arrays;
 import java.util.Random;
 import static com.luckystars.tests.tetris.Constants.*;
 import static com.luckystars.tests.tetris.Utils.deepCopy;
@@ -16,6 +15,7 @@ public class BlockImpl implements Block{
     protected int x;
     protected int y;
     private JPanel gamePanel;
+    protected BaseGround ground;
 
     private BlockImpl(){
         super();
@@ -86,11 +86,7 @@ public class BlockImpl implements Block{
         return shape;
     }
 
-    public static Block getRandomBlock(JPanel panel){
-        int[][] shape = new int[4][4];
-        for (int i = 0; i < shape.length; i++) {
-            Arrays.fill(shape[i], 0);
-        }
+    public static Block getRandomBlock(JPanel panel,BaseGround ground){
         BlockImpl b = new BlockImpl();
         b.shape = getRandomShape();
         b.gamePanel = panel;
@@ -101,6 +97,8 @@ public class BlockImpl implements Block{
                 blockProxy
         );
         b.gamePanel.repaint();
+        b.ground = ground;
+        b.printShape();
         return proxyBlock;
     }
 
