@@ -1,25 +1,11 @@
 package com.luckystars.tests.tetris;
 
-import static com.luckystars.tests.tetris.Constants.*;
+import java.awt.*;
 
-/**
- * 所有基底
- * 方块落下之后加入基底
- */
-public class BaseGround {
+public interface BaseGround {
+    void pushIntoGround(Block block);
 
-    private int[][] ground = new int[WIDTH][HEIGHT];
+    void drawGround(Graphics g);
 
-    public BaseGround() {
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
-                ground[i][j] = 0;
-            }
-        }
-    }
-
-
-
-
-
+    void printGround();
 }

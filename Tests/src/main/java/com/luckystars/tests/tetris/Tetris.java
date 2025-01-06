@@ -14,6 +14,8 @@ public class Tetris  extends JFrame {
 
     private Block currentBlock;
 
+    private BaseGroundImpl ground;
+
 
     public Tetris() {
 
@@ -28,12 +30,17 @@ public class Tetris  extends JFrame {
                 g.setColor(Color.GREEN);
 //                currentBlock.eraseBlock(g);
                 super.paint(g);
+                ground.drawGround(g);
                 currentBlock.drawBlock(g);
                 // 在这里绘制游戏元素
             }
 
         };
-        currentBlock = BlockImpl.getRandomBlock(gamePanel);
+
+        this.currentBlock = BlockImpl.getRandomBlock(gamePanel);
+        this.ground = new BaseGroundImpl(gamePanel);
+
+
         gamePanel.setBackground(Color.BLACK);
 
         gamePanel.addKeyListener(new KeyListener() {
@@ -59,8 +66,13 @@ public class Tetris  extends JFrame {
                     System.out.println("Down");
                     currentBlock.moveDown();
                 }
+                if (e.getKeyCode() == KeyEvent.VK_TAB)  {
+                    System.out.println("tab");
+                    currentBlock = BlockImpl.getRandomBlock(gamePanel);
+                }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE)  {
                     System.out.println("space");
+                    ground.pushIntoGround(currentBlock);
                     currentBlock = BlockImpl.getRandomBlock(gamePanel);
                 }
             }

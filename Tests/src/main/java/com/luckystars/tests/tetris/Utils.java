@@ -14,4 +14,15 @@ public class Utils {
         }
         return copy;
     }
+
+    public static void printShape(int[][] shape){
+        System.out.println("print Shape start");
+        for (int i = 0; i < shape.length; i++) {
+            for (int j = 0; j < shape[i].length; j++) {
+                System.out.print(shape[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("print Shape end");
+    }
 }

@@ -17,4 +17,10 @@ public interface Block {
     void drawBlock(Graphics g);
 
     void eraseBlock(Graphics g);
+
+    int[][] getShape();
+
+    int getX();
+
+    int getY();
 }

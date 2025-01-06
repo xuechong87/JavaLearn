@@ -5,6 +5,7 @@ import java.awt.*;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.Arrays;
 import java.util.Random;
 import static com.luckystars.tests.tetris.Constants.*;
 import static com.luckystars.tests.tetris.Utils.deepCopy;
@@ -18,16 +19,13 @@ public class BlockImpl implements Block{
 
     private BlockImpl(){
         super();
+        x=0;
+        y=0;
     }
 
     @Override
     public void printShape(){
-        for (int i = 0; i < shape.length; i++) {
-            for (int j = 0; j < shape[i].length; j++) {
-                System.out.print(shape[i][j] + " ");
-            }
-            System.out.println();
-        }
+        Utils.printShape(this.shape);
     }
 
     @Override
@@ -43,15 +41,15 @@ public class BlockImpl implements Block{
 
     @Override
     public void moveLeft() {
-        this.x -= PIC_UNIT;
+        this.x -= 1;
     }
     @Override
     public void moveRight() {
-        this.x += PIC_UNIT;
+        this.x += 1;
     }
     @Override
     public void moveDown() {
-        this.y += PIC_UNIT;
+        this.y += 1;
     }
 
     @Override
@@ -61,7 +59,7 @@ public class BlockImpl implements Block{
         for (int i = 0; i < shape.length; i++) {
             for (int j = 0; j < shape[i].length; j++) {
                 if (shape[i][j] == 1) {
-                    g.fillRect( j * PIC_UNIT + this.x,  i * PIC_UNIT + this.y, PIC_UNIT, PIC_UNIT);
+                    g.fillRect( (j +this.x)* PIC_UNIT , (i + this.y) * PIC_UNIT , PIC_UNIT, PIC_UNIT);
                 }
             }
         }
@@ -73,7 +71,7 @@ public class BlockImpl implements Block{
         for (int i = 0; i < shape.length; i++) {
             for (int j = 0; j < shape[i].length; j++) {
                 if (shape[i][j] == 1) {
-                    g.clearRect( j * PIC_UNIT + this.x,  i * PIC_UNIT + this.y, PIC_UNIT, PIC_UNIT);
+                    g.clearRect( (j +this.x)* PIC_UNIT ,  (i + this.y) * PIC_UNIT , PIC_UNIT, PIC_UNIT);
                 }
             }
         }
@@ -91,14 +89,10 @@ public class BlockImpl implements Block{
     public static Block getRandomBlock(JPanel panel){
         int[][] shape = new int[4][4];
         for (int i = 0; i < shape.length; i++) {
-            for (int j = 0; j < shape[i].length; j++) {
-                shape[i][j] = 0;
-            }
+            Arrays.fill(shape[i], 0);
         }
         BlockImpl b = new BlockImpl();
         b.shape = getRandomShape();
-        b.y = 0;
-        b.x = 0;
         b.gamePanel = panel;
         BlockProxy blockProxy = new BlockProxy(b);
         Block proxyBlock = (Block) Proxy.newProxyInstance(
@@ -106,6 +100,7 @@ public class BlockImpl implements Block{
                 new Class<?>[] { Block.class },
                 blockProxy
         );
+        b.gamePanel.repaint();
         return proxyBlock;
     }
 
@@ -135,4 +130,38 @@ public class BlockImpl implements Block{
 
 
 
+    @Override
+    public int[][] getShape() {
+        return shape;
+    }
+
+    public void setShape(int[][] shape) {
+        this.shape = shape;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public JPanel getGamePanel() {
+        return gamePanel;
+    }
+
+    public void setGamePanel(JPanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
 }
