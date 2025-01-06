@@ -60,11 +60,16 @@ public class Tetris  extends JFrame {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
                     System.out.println("UP");
+                    //TODO 判读变形后是否会超出边界
                     currentBlock.turn();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN)  {
                     System.out.println("Down");
                     currentBlock.moveDown();
+                    if(ground.hitGround(currentBlock)){
+                        ground.pushIntoGround(currentBlock);
+                        currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
+                    }
                 }
                 if (e.getKeyCode() == KeyEvent.VK_TAB)  {
                     System.out.println("tab");

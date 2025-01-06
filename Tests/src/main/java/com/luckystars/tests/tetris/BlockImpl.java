@@ -36,16 +36,40 @@ public class BlockImpl implements Block{
                 newShape[i][j] = shape[shape.length - 1 - j][i];
             }
         }
-        shape = newShape;
+        if(checkBorder(newShape)){
+            shape = newShape;
+        }
+    }
+
+    private boolean checkBorder(int[][] shapeToCheck) {
+        for (int i = 0; i < shapeToCheck.length; i++) {
+            for (int j = 0; j < shapeToCheck[i].length; j++) {
+                if (shapeToCheck[i][j] == 1 ) {
+                    if((j + this.x) < 0 || (j + this.x) >= WIDTH || (i + this.y) >= HEIGHT){
+                        return false;
+                    }
+                    if(ground.getGround()[i + this.y][j + this.x] == 1){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     @Override
     public void moveLeft() {
         this.x -= 1;
+        if(!checkBorder(shape)){
+            this.x += 1;
+        }
     }
     @Override
     public void moveRight() {
         this.x += 1;
+        if(!checkBorder(shape)){
+            this.x -= 1;
+        }
     }
     @Override
     public void moveDown() {
@@ -60,6 +84,12 @@ public class BlockImpl implements Block{
             for (int j = 0; j < shape[i].length; j++) {
                 if (shape[i][j] == 1) {
                     g.fillRect( (j +this.x)* PIC_UNIT , (i + this.y) * PIC_UNIT , PIC_UNIT, PIC_UNIT);
+                    // 设置边框颜色
+                    g.setColor(Color.BLACK);
+                    // 绘制边框，边框宽度为1像素，所以左上角坐标要向内偏移1像素
+                    g.drawRect((j +this.x)* PIC_UNIT + 1, (i + this.y) * PIC_UNIT + 1, PIC_UNIT - 1, PIC_UNIT - 1);
+                    // 恢复方块颜色
+                    g.setColor(Color.GREEN);
                 }
             }
         }
