@@ -13,9 +13,41 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+        </dependency>
+    </dependencies>
     <!-- 添加 maven-jar-plugin -->
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>2.1.0</version>
+                <executions>
+                    <execution>
+                        <id>bundle-exe</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>target/Tetris.exe</outfile>
+                            <jar>target/Tetris-1.0-SNAPSHOT.jar</jar>
+                            <errTitle>Application Error</errTitle>
+                            <cmdLine></cmdLine>
+                            <chdir>.</chdir>
+                            <priority>normal</priority>
+                            <downloadUrl>http://java.com/download</downloadUrl>
+                            <supportUrl></supportUrl>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -49,6 +81,27 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- mvn clean package native:install -->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                </executions>
+                <configuration>
+                    <executable>native</executable>
+                    <arguments>
+                        <argument>install</argument>
+                        <argument>-Dproject.name=${project.artifactId}</argument>
+                        <argument>-Dproject.version=${project.version}</argument>
+                        <argument>-Dproject.build.directory=${project.build.directory}</argument>
+                        <argument>-Dmaven.artifactId=${project.artifactId}</argument>
+                        <argument>-Dmaven.groupId=${project.groupId}</argument>
+                        <argument>-Dmaven.version=${project.version}</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>

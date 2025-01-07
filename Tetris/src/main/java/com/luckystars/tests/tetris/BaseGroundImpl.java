@@ -2,7 +2,9 @@ package com.luckystars.tests.tetris;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static com.luckystars.tests.tetris.Constants.*;
 
@@ -88,6 +90,47 @@ public class BaseGroundImpl implements BaseGround{
                 }
             }
             this.ground = newGround;
+        }
+    }
+
+    public java.util.List<Integer> getFullLines(){
+        java.util.List<Integer> fullLines = new ArrayList<>();
+        for (int i = 0; i < HEIGHT; i++) {
+            boolean full = true;
+            for (int j = 0; j < WIDTH; j++) {
+                if(ground[i][j] == 0){
+                    full = false;
+                    break;
+                }
+            }
+            if(full){
+                fullLines.add(i);
+            }
+        }
+        return fullLines;
+    }
+
+    @Override
+    public void removeFullLines() {
+        synchronized (this) {
+            java.util.List<Integer> fullLines = getFullLines();
+            if(fullLines!=null&&!fullLines.isEmpty()){
+
+                int[][] newGround = new int[HEIGHT][WIDTH];
+                int size = fullLines.size();
+                for(int i =0;i<fullLines.size();i++){
+                    Arrays.fill(newGround[i], 0);
+                }
+                int newIndex = size;
+                for (int i = 0; i < HEIGHT ; i++) {
+                    if(fullLines.contains(i)){
+                        continue;
+                    }
+                    System.arraycopy(ground[i], 0, newGround[newIndex], 0, WIDTH);
+                    newIndex++;
+                }
+                this.ground = newGround;
+            }
         }
     }
 

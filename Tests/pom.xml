@@ -26,6 +26,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>6.6.5</version> <!-- 请检查最新版本 -->
+<!--            <version>6.6.5</version> &lt;!&ndash; 请检查最新版本 &ndash;&gt;-->
+        </dependency>
+        <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.4.17</version>

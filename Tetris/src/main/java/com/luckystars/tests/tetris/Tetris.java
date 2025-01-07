@@ -12,13 +12,13 @@ import static com.luckystars.tests.tetris.Constants.PIC_UNIT;
 
 public class Tetris  extends JFrame {
 
-    private JPanel gamePanel;
+    private final JPanel gamePanel;
 
     private Block currentBlock;
 
-    private BaseGroundImpl ground;
+    private final BaseGroundImpl ground;
 
-    private Timer timer;
+    private final Timer timer;
 
     private volatile boolean isRunning = true;
 
@@ -54,51 +54,52 @@ public class Tetris  extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_TAB)  {
-                    System.out.println("tab");
-                    if(timer.isRunning()){
-                        timer.stop();
-                        isRunning = false;
-                    }else{
-                        timer.restart();
-                        isRunning = true;
-                    }
-                }
-                // 暂停时不处理按键
-                if(!isRunning){
-                    return;
-                }
-                // 处理按键事件
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    System.out.println("Left");
-                    currentBlock.moveLeft();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    System.out.println("Right");
-                    currentBlock.moveRight();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    System.out.println("UP");
-                    currentBlock.turn();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_DOWN)  {
-                    System.out.println("Down");
-                    currentBlock.moveDown();
-                    if(ground.hitGround(currentBlock)){
-                        ground.pushIntoGround(currentBlock);
-                        currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
-                        if(ground.lastLinefull()){
-                            ground.removeLastLine();
+                synchronized (gamePanel) {
+
+                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                        System.out.println("tab");
+                        if (timer.isRunning()) {
+                            isRunning = false;
+                            timer.stop();
+                        } else {
+                            isRunning = true;
+                            timer.restart();
                         }
                     }
-                }
-                if (e.getKeyCode() == KeyEvent.VK_SPACE)  {
-                    System.out.println("space");
-                    ground.pushIntoGround(currentBlock);
-                    currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
-                }
+                    // 暂停时不处理按键
+                    if (!isRunning) {
+                        return;
+                    }
+                    // 处理按键事件
+                    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                        System.out.println("Left");
+                        currentBlock.moveLeft();
+                    }
+                    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
+                        System.out.println("Right");
+                        currentBlock.moveRight();
+                    }
+                    if (e.getKeyCode() == KeyEvent.VK_UP) {
+                        System.out.println("UP");
+                        currentBlock.turn();
+                    }
+                    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                        System.out.println("Down");
+                        currentBlock.moveDown();
+                        if (ground.hitGround(currentBlock)) {
+                            ground.pushIntoGround(currentBlock);
+                            currentBlock = BlockImpl.getRandomBlock(gamePanel, ground);
+                            ground.removeFullLines();
+                        }
+                    }
+//                if (e.getKeyCode() == KeyEvent.VK_SPACE)  {
+//                    System.out.println("space");
+//                    ground.pushIntoGround(currentBlock);
+//                    currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
+//                }
 
+                }
             }
 
             @Override
@@ -110,15 +111,16 @@ public class Tetris  extends JFrame {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentBlock.moveDown();
-                if(ground.hitGround(currentBlock)){
-                    ground.pushIntoGround(currentBlock);
-                    currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
-                    if(ground.lastLinefull()){
-                        ground.removeLastLine();
+                synchronized (gamePanel) {
+                    currentBlock.moveDown();
+                    if(ground.hitGround(currentBlock)){
+                        ground.pushIntoGround(currentBlock);
+                        currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
+                        ground.removeFullLines();
                     }
+                    repaint();
                 }
-                repaint();
+
             }
         };
 

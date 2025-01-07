@@ -14,4 +14,6 @@ public interface BaseGround {
     void drawGround(Graphics g);
 
     void printGround();
+
+    void removeFullLines();
 }
