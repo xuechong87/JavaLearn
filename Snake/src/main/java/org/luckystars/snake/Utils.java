@@ -16,7 +16,7 @@ public class Utils {
     }
 
     public static void printShape(int[][] shape){
-        System.out.println("print Shape start");
+        System.out.println("------------------print Shape start------------------");
         for (int i = shape.length-1; i >=0; i--) {
             for (int j = 0; j < shape[i].length; j++) {
                 if(shape[i][j]==0){
@@ -27,6 +27,6 @@ public class Utils {
             }
             System.out.println();
         }
-        System.out.println("print Shape end");
+        System.out.println("------------------print Shape end------------------");
     }
 }

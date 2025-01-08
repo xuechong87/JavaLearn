@@ -37,15 +37,6 @@ public class BaseGroundImpl implements BaseGround {
 
 
 
-    public boolean lastLinefull(){
-        for (int i = 0; i < WIDTH; i++) {
-            if(ground[HEIGHT-1][i] == 0){
-                return false;
-            }
-        }
-        return true;
-    }
-
 
     @Override
     public void drawGround(Graphics g) {

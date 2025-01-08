@@ -17,11 +17,12 @@ public class Tests {
 
         snake.move();
         snake.printSnake();
-        ground.setFood( new Vector2D(3,0));;
+        ground.setFood( new Vector2D(4,0));;
         snake.move();
         snake.printSnake();
 
         snake.turnUp();
+//        snake.turnDown();
         snake.move();
         snake.printSnake();
         snake.move();

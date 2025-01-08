@@ -91,9 +91,15 @@ public class Game extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 synchronized (gamePanel) {
+
                     // 在这里处理游戏逻辑
                     snake.move();
-
+                    if (snake.isDead()) {
+                        System.out.println("Game Over");
+                        isRunning = false;
+                        timer.stop();
+                        return;
+                    }
                     repaint();
                 }
 
