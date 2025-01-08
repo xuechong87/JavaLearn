@@ -34,7 +34,11 @@ public class Tests {
     private static void fillGround(BaseGround ground){
         int[][] groundData = ground.getGround();
         for (int i = 0; i < HEIGHT; i++) {
-            int x = (WIDTH-i%(WIDTH)-1);
+//            int x = (WIDTH-i%(WIDTH)-1);
+            int x = i%(2*WIDTH);
+            if(x>=WIDTH){
+                x =  2*WIDTH -x -1;
+            }
 //            int x = i<WIDTH?i:(WIDTH-i%(WIDTH-1) -1);
 //            int x = i < WIDTH ? i : WIDTH - 1 - (i - WIDTH );
 //            System.out.println(x);
