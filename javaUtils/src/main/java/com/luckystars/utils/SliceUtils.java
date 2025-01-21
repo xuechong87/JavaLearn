@@ -33,7 +33,7 @@ public class SliceUtils {
     }
 
     public static List<Slice> getSlice(Integer size){
-        int sliceCount = size<=VOUCHER_BATCH_SIZE ?1 :(size%VOUCHER_BATCH_SIZE==0 ? size/VOUCHER_BATCH_SIZE :size/VOUCHER_BATCH_SIZE+1);
+        int sliceCount =(size%VOUCHER_BATCH_SIZE==0 ? size/VOUCHER_BATCH_SIZE :size/VOUCHER_BATCH_SIZE+1);
         List<Slice> voucherSliceList = new ArrayList<>();
         for (int i = 0; i < sliceCount; i++) {
             Slice voucherSlice = new Slice();
@@ -50,12 +50,29 @@ public class SliceUtils {
 
     @Test
     public void test(){
-        System.out.println(getSlice(49));
-        System.out.println(getSlice(50));
-        System.out.println(getSlice(51));
-        System.out.println(getSlice(99));
-        System.out.println(getSlice(100));
-        System.out.println(getSlice(101));
-        System.out.println(getSlice(111));
+        getSlice(0);
+        testSlice(49);
+        testSlice(50);
+        testSlice(51);
+        testSlice(99);
+        testSlice(100);
+        testSlice(101);
+        testSlice(111);
+
+    }
+
+    public static void testSlice(int listSize){
+        System.out.println("listSize:"+listSize);
+        List<Integer> intList = new ArrayList<>(listSize);
+        for (int i = 0; i < listSize; i++) {
+            intList.add(i);
+        }
+        List<Slice> sliceList = getSlice(listSize);
+        for (Slice slice : sliceList) {
+            System.out.println(slice);
+            List<Integer> splitList = intList.subList(slice.getStart(), slice.getEnd()+1);
+            System.out.println(splitList);
+        }
+        System.out.println("listSlice end");
     }
 }
