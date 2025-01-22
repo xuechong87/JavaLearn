@@ -76,9 +76,15 @@ public class BlockImpl implements Block {
     public void moveDown() {
         this.y += 1;
     }
+    public void moveUp() {
+        this.y -= 1;
+    }
 
     @Override
     public void drawBlock(Graphics g) {
+        if(DEBUG){
+            return;
+        }
         g.setColor(Color.GREEN);
         int[][] shape = this.shape;
         for (int i = 0; i < shape.length; i++) {

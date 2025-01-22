@@ -41,7 +41,7 @@ public class BaseGroundImpl implements BaseGround{
             for (int j = 0; j < shape[i].length; j++) {
                 if (shape[i][j] == 1) {
                     //获取下方是否有砖块或者超出边界
-                    if(ground[y + i +1][x + j] == 1){
+                    if((i + y+1) >= HEIGHT || ground[y + i +1][x + j] == 1){
                         return true;
                     }
                 }
@@ -51,13 +51,17 @@ public class BaseGroundImpl implements BaseGround{
     }
 
     public boolean gameEnd(Block block){
+//        if(true){
+//            return false;
+//        }
         int[][] shape = block.getShape();
         int x = block.getX();
-        int y = block.getY();
+        int y = block.getY()-1;//刷新位置
         for (int i = 0; i < shape.length; i++) {
             for (int j = 0; j < shape[i].length; j++) {
                 if (shape[i][j] == 1) {
-                    if((i + y+1) >= HEIGHT){
+                    if(ground[y + i +1][x + j] == 1){
+                        System.out.println("game over");
                         return true;
                     }
                 }
@@ -151,6 +155,10 @@ public class BaseGroundImpl implements BaseGround{
 
     @Override
     public void drawGround(Graphics g) {
+        if(DEBUG){
+            printGround();
+            return;
+        }
         g.setColor(Color.GREEN);
         int[][] shape = this.ground;
         for (int i = 0; i < shape.length; i++) {

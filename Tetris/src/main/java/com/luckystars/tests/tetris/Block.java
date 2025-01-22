@@ -14,6 +14,8 @@ public interface Block {
 
     void moveDown();
 
+    void moveUp();
+
     void drawBlock(Graphics g);
 
     void eraseBlock(Graphics g);

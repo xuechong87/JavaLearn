@@ -88,6 +88,9 @@ public class Tetris  extends JFrame {
                         System.out.println("Down");
                         currentBlock.moveDown();
                         if(ground.gameEnd(currentBlock)){
+                            currentBlock.moveUp();
+                            ground.pushIntoGround(currentBlock);
+                            gamePanel.repaint();
                             timer.stop();
                             isRunning = false;
                         }else{
@@ -119,6 +122,8 @@ public class Tetris  extends JFrame {
                 synchronized (gamePanel) {
                     currentBlock.moveDown();
                     if(ground.gameEnd(currentBlock)){
+                        currentBlock.moveUp();
+                        ground.pushIntoGround(currentBlock);
                         timer.stop();
                         isRunning = false;
                     }else{
