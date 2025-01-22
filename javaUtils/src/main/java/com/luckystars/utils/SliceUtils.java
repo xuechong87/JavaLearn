@@ -50,7 +50,7 @@ public class SliceUtils {
 
     @Test
     public void test(){
-        getSlice(0);
+        testSlice(0);
         testSlice(49);
         testSlice(50);
         testSlice(51);
@@ -62,7 +62,7 @@ public class SliceUtils {
     }
 
     public static void testSlice(int listSize){
-        System.out.println("listSize:"+listSize);
+        System.out.println("========listSize:"+listSize+"========");
         List<Integer> intList = new ArrayList<>(listSize);
         for (int i = 0; i < listSize; i++) {
             intList.add(i);
@@ -73,6 +73,6 @@ public class SliceUtils {
             List<Integer> splitList = intList.subList(slice.getStart(), slice.getEnd()+1);
             System.out.println(splitList);
         }
-        System.out.println("listSlice end");
+        System.out.println("========listSlice end========");
     }
 }

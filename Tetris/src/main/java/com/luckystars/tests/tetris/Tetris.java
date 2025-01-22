@@ -87,10 +87,15 @@ public class Tetris  extends JFrame {
                     if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                         System.out.println("Down");
                         currentBlock.moveDown();
-                        if (ground.hitGround(currentBlock)) {
-                            ground.pushIntoGround(currentBlock);
-                            currentBlock = BlockImpl.getRandomBlock(gamePanel, ground);
-                            ground.removeFullLines();
+                        if(ground.gameEnd(currentBlock)){
+                            timer.stop();
+                            isRunning = false;
+                        }else{
+                            if (ground.hitGround(currentBlock)) {
+                                ground.pushIntoGround(currentBlock);
+                                currentBlock = BlockImpl.getRandomBlock(gamePanel, ground);
+                                ground.removeFullLines();
+                            }
                         }
                     }
 //                if (e.getKeyCode() == KeyEvent.VK_SPACE)  {
@@ -113,10 +118,15 @@ public class Tetris  extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 synchronized (gamePanel) {
                     currentBlock.moveDown();
-                    if(ground.hitGround(currentBlock)){
-                        ground.pushIntoGround(currentBlock);
-                        currentBlock = BlockImpl.getRandomBlock(gamePanel,ground);
-                        ground.removeFullLines();
+                    if(ground.gameEnd(currentBlock)){
+                        timer.stop();
+                        isRunning = false;
+                    }else{
+                        if (ground.hitGround(currentBlock)) {
+                            ground.pushIntoGround(currentBlock);
+                            currentBlock = BlockImpl.getRandomBlock(gamePanel, ground);
+                            ground.removeFullLines();
+                        }
                     }
                     repaint();
                 }
