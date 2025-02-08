@@ -1,10 +1,11 @@
 package com.luckystars.tests.tetris;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 import static com.luckystars.tests.tetris.Constants.*;
 
@@ -86,11 +87,11 @@ public class BaseGroundImpl implements BaseGround{
             }
             this.printGround();
             this.panel.repaint();
-            System.out.println("lastLine full" + lastLinefull());
+            System.out.println("lastLine full" + lastLineFull());
         }
     }
 
-    public boolean lastLinefull(){
+    public boolean lastLineFull(){
         for (int i = 0; i < WIDTH; i++) {
             if(ground[HEIGHT-1][i] == 0){
                 return false;
@@ -104,9 +105,7 @@ public class BaseGroundImpl implements BaseGround{
             int[][] newGround = new int[HEIGHT][WIDTH];
             Arrays.fill(newGround[0], 0);
             for (int i = 0; i < HEIGHT - 1; i++) {
-                for (int j = 0; j < WIDTH; j++) {
-                    newGround[i + 1][j] = ground[i][j];
-                }
+                System.arraycopy(ground[i], 0, newGround[i + 1], 0, WIDTH);
             }
             this.ground = newGround;
         }
