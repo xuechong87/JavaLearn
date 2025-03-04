@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SliceUtils {
 
-    public static final Integer VOUCHER_BATCH_SIZE = 50;
+    public static final Integer BATCH_SIZE = 50;
 
     public static class Slice {
         private Integer start;
@@ -33,19 +33,19 @@ public class SliceUtils {
     }
 
     public static List<Slice> getSlice(Integer size){
-        int sliceCount =(size%VOUCHER_BATCH_SIZE==0 ? size/VOUCHER_BATCH_SIZE :size/VOUCHER_BATCH_SIZE+1);
-        List<Slice> voucherSliceList = new ArrayList<>();
+        int sliceCount =(size% BATCH_SIZE ==0 ? size/ BATCH_SIZE :size/ BATCH_SIZE +1);
+        List<Slice> sliceList = new ArrayList<>();
         for (int i = 0; i < sliceCount; i++) {
-            Slice voucherSlice = new Slice();
-            voucherSlice.setStart(i*VOUCHER_BATCH_SIZE);
+            Slice slice = new Slice();
+            slice.setStart(i* BATCH_SIZE);
             if(i == sliceCount-1){
-                voucherSlice.setEnd(size-1);
+                slice.setEnd(size-1);
             }else{
-                voucherSlice.setEnd((i+1)*VOUCHER_BATCH_SIZE-1);
+                slice.setEnd((i+1)* BATCH_SIZE -1);
             }
-            voucherSliceList.add(voucherSlice);
+            sliceList.add(slice);
         }
-        return voucherSliceList;
+        return sliceList;
     }
 
     @Test
